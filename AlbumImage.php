@@ -7,7 +7,7 @@
  */
 
 namespace Plugin\ImageAlbum;
-use Plugin\ImageAlbum\Entity\Albumimages as ImageEntity;
+use Plugin\ImageAlbum\Entity\AlbumImages as ImageEntity;
 
 class AlbumImage extends BaseModel {
     public $name="album_images";
@@ -30,7 +30,7 @@ class AlbumImage extends BaseModel {
      */
     public function getImages($albumId){
        $arrayAlbumItem=array();
-       $results=ipDb()->selectAll($this->name,"*",array('id'=>$albumId));
+       $results=ipDb()->selectAll($this->name,"*",array('album_id'=>$albumId));
         if($results){
         foreach($results as $item){
             $AlbumItem=new ImageEntity();
@@ -38,6 +38,7 @@ class AlbumImage extends BaseModel {
             $AlbumItem->setAlbum($item['album_id']);
             $AlbumItem->setCaption($item['caption']);
             $AlbumItem->setDate($item['date']);
+            $AlbumItem->setImages($item['image']);
             $arrayAlbumItem[]=$AlbumItem;
         }
             return $arrayAlbumItem;
