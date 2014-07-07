@@ -14,23 +14,28 @@ class AlbumImages {
     private $images;
     private $caption;
     private $date;
-    private $album;
+    private $album_id;
+    private $_uploadPath;
 
     /**
      * @param mixed $album
      */
-    public function setAlbum($album)
+    public function setAlbumID($album)
     {
-        $this->album = $album;
+        $this->album_id = (int)$album;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAlbum()
-    {
-        return $this->album;
+
+    public function __construct(){
+        $this->_uploadPath=ipHomeUrl()."Plugin/ImageAlbum/uploads";
     }
+
+    public function getAlbumID()
+    {
+      return $this->album_id;
+    }
+
+
 
     /**
      * @param mixed $caption
@@ -69,7 +74,7 @@ class AlbumImages {
      */
     public function setId($id)
     {
-        $this->id = $id;
+        $this->id = (int)$id;
     }
 
     /**
@@ -89,10 +94,19 @@ class AlbumImages {
     }
 
     /**
+     * Returns the Path to the Image
+     * @param $thumbnailVersion if true returns the thumbnail or false image
      * @return mixed
      */
-    public function getImages()
+    public function getImages($thumbnailVersion=false)
     {
-        return $this->images;
+        $path=explode("/",$this->images);
+        $splitPath=end($path);
+
+        if($thumbnailVersion):
+            return $this->_uploadPath."/thumb/".$splitPath;
+        else:
+            return $this->_uploadPath."/".$splitPath;
+        endif;
     }
 } 
