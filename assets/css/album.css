@@ -13,6 +13,9 @@
   padding: 1%
   border:1px solid red;
 }
+#AlbumContent div.albums {
+  margin-bottom: 3% !important;
+}
 .ipsGrid {
   padding: 2% !important;
 }
