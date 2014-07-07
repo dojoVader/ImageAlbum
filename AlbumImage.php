@@ -17,7 +17,7 @@ class AlbumImage extends BaseModel {
             "image"=>$image->getImages(),
             "caption"=>$image->getCaption(),
             "date"=>$image->getDate(),
-            "album_id"=>$image->getAlbum()
+            "album_id"=>$image->getAlbumID()
         );
 
         return ipDb()->insert($this->name,$data);
@@ -35,7 +35,7 @@ class AlbumImage extends BaseModel {
         foreach($results as $item){
             $AlbumItem=new ImageEntity();
             $AlbumItem->setId($item['id']);
-            $AlbumItem->setAlbum($item['album_id']);
+            $AlbumItem->setAlbumID($item['album_id']);
             $AlbumItem->setCaption($item['caption']);
             $AlbumItem->setDate($item['date']);
             $AlbumItem->setImages($item['image']);
