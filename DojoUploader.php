@@ -21,11 +21,11 @@ class DojoUploader
 
     public function makeThumbnail($name){
         //Explode and get the path
-        $tmp=explode("/",$name);
-        $path=$tmp[1];
+        $path=explode("/",$name);
+        $splitPath=end($path);
         $thumbnail_EventsImages=new gdResize($name);
         $thumbnail_EventsImages->resizeImage(120, 120,'crop');
-        $thumbnail_EventsImages->saveImage("uploads/thumb/".$path,90);
+        $thumbnail_EventsImages->saveImagetoFolder($this->finalDestination."/thumb/",$splitPath,90);
     }
 
     public function findTempDirectory()
@@ -235,9 +235,10 @@ class DojoUploader
                     $AlbumItem=new ImageEntity();
                     $AlbumItem->setDate(date( 'Y-m-d H:i:s', time()));
                     $AlbumItem->setCaption("No Caption Set One");
-                    $AlbumItem->setAlbum($Albumid);
-                    $AlbumItem->setImages($_post['file']);
+                    $AlbumItem->setAlbumID($Albumid);
+                    $AlbumItem->setImages($_post['name']);
                     $AlbumModel->save($AlbumItem);
+                    $this->makeThumbnail($file);
 
                 } elseif (strlen($_FILES['uploadedfiles']['name'][$i])) {
                     $htmldata[$cnt] = array("ERROR" => "File could not be moved: " . $_FILES['uploadedfiles']['name'][$i]);
@@ -247,7 +248,7 @@ class DojoUploader
             $tmp = $_post['file'];
 
 
-            $this->makeThumbnail($tmp);
+
 
 
             return $htmldata;
@@ -257,7 +258,7 @@ class DojoUploader
             // 	If the data passed has 'uploadedfile', then it's HTML.
             //	There may be better ways to check this, but this *is* just a test file.
             //
-            if (!Yii::app()->request->isAjaxRequest):
+            if (!ipRequest()->isPost()):
                 $m = move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $upload_path . $_FILES['uploadedfile']['name']);
                 //$galleryRecord=new GalleryRecords();
                 //$galleryRecord->refId=$id;
@@ -268,8 +269,8 @@ class DojoUploader
                 $AlbumItem=new ImageEntity();
                 $AlbumItem->setDate(date( 'Y-m-d H:i:s', time()));
                 $AlbumItem->setCaption("No Caption Set One");
-                $AlbumItem->setAlbum($Albumid);
-                $AlbumItem->setImages($_post['file']);
+                $AlbumItem->setAlbumID($Albumid);
+                $AlbumItem->setImages($_post['name']);
                 $AlbumModel->save($AlbumItem);
                 $this->makeThumbnail($tmp);
 
