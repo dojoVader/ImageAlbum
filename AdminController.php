@@ -3,6 +3,7 @@
 namespace Plugin\ImageAlbum;
 use \Plugin\ImageAlbum\Form\Album as AlbumForm;
 use \Plugin\ImageAlbum\Entity\AlbumEntity;
+use \Plugin\ImageAlbum\Entity\AlbumImages;
 use \Plugin\ImageAlbum\AlbumImage;
 use \Plugin\ImageAlbum\Model;
 use \Plugin\ImageAlbum\DojoUploader;
@@ -46,8 +47,10 @@ class AdminController extends \Ip\Controller
         }
         $model=new Model();
         $data=$model->byId($id);
+        $listObject=new AlbumImage();
 
-        return ipView("view/backend/attach.php",array('data'=>$data))->render();
+
+        return ipView("view/backend/attach.php",array('data'=>$data,'list'=>$listObject->getImages($id)))->render();
     }
 
     public function create(){
