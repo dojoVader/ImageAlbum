@@ -27,11 +27,22 @@
         <h4>Attached Images</h4>
         <hr/>
         <ul class="list-group">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+            <?php if($list === NULL ):?>
+            <li class="list-group-item">There no Images in this Album</li>
+            <?php else: ?>
+
+                <?php
+                /**
+                 * @var $imageItem \Plugin\ImageAlbum\Entity\AlbumImages
+                 */
+                foreach($list as $imageItem): ?>
+            <li class="col-md-6 list-group-item"><img src="<?php echo $imageItem->getImages(true); ?>">
+                <div class="clearfix"></div>
+                <br/>
+                <a href="#" class='btn btn-primary'>Delete Image</a>
+            </li>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </ul>
     </div>
     <div class="col-md-6">
