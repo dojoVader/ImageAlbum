@@ -9,7 +9,14 @@
 namespace Plugin\ImageAlbum\Entity;
 
 
+use Plugin\ImageAlbum\AlbumImage;
+
 class AlbumEntity {
+
+    private $description;
+    private $date;
+    private $name;
+    private $albumImage;
 
     private $id;
 
@@ -62,9 +69,28 @@ class AlbumEntity {
     }
 
 
-    private $description;
-    private $date;
-    private $name;
+
+    /**
+     * @param mixed $albumImage
+     */
+    public function setAlbumImage($albumImage)
+    {
+        $this->albumImage = $albumImage;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAlbumImage()
+    {
+        //Returns an Albumitem Entity
+        $albumModel=new AlbumImage();
+        $albumItem=$albumModel->getByID($this->albumImage);
+        if($albumItem !== NULL){
+        return $albumItem->getImages(true);
+        }
+
+    }
 
     /**
      * @return mixed
