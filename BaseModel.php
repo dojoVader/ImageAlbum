@@ -81,6 +81,10 @@ class BaseModel {
     public function getAll(){
         return ipDb()->selectAll($this->name,"*");
     }
+
+    public function delete($whereKey,$whereValue){
+        return ipDb()->delete($this->name,array($whereKey=>$whereValue));
+    }
 }
 
 ?>

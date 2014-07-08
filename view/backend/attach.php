@@ -36,10 +36,10 @@
                  * @var $imageItem \Plugin\ImageAlbum\Entity\AlbumImages
                  */
                 foreach($list as $imageItem): ?>
-            <li class="col-md-6 list-group-item"><img src="<?php echo $imageItem->getImages(true); ?>">
+            <li class="col-md-6 list-group-item" id='<?php echo sprintf('album%d',$imageItem->getId()) ?>'><img class="img-responsive" src="<?php echo $imageItem->getImages(true); ?>">
                 <div class="clearfix"></div>
                 <br/>
-                <a href="#" class='btn btn-primary'>Delete Image</a>
+                <a data-deleteid="<?php echo $imageItem->getId() ?>" href="<?php echo ipActionUrl(array('aa'=>'ImageAlbum.delete','id'=>$imageItem->getId())) ?>" class='btn ajaxDelete btn-primary'>Delete Image</a>
             </li>
                 <?php endforeach; ?>
             <?php endif; ?>

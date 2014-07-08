@@ -24,7 +24,7 @@ class DojoUploader
         $path=explode("/",$name);
         $splitPath=end($path);
         $thumbnail_EventsImages=new gdResize($name);
-        $thumbnail_EventsImages->resizeImage(120, 120,'crop');
+        $thumbnail_EventsImages->resizeImage(229, 241,'crop');
         $thumbnail_EventsImages->saveImagetoFolder($this->finalDestination."/thumb/",$splitPath,90);
     }
 

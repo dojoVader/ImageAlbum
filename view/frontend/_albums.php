@@ -8,10 +8,8 @@
 ?>
 
 <div class="col-md-12" id="AlbumContent">
-    <h1>Image Gallery</h1>
-    <div class="alert alert-info">Note ! Deleting the Album will Delete attached images also</div>
-    <hr/>
-    <div class="row">
+    <h3>Image Gallery</h3>
+   <div class="row">
         <?php
         /**
          * @var $albums \Plugin\ImageAlbum\Entity\AlbumEntity
@@ -26,22 +24,9 @@
                 <?php endif; ?>
                 </a>
             <div class="caption">
-                <h3><?php  echo esc($albums->getName()); ?></h3>
+                <h5><?php  echo esc($albums->getName()); ?></h5>
+                <small><?php echo $albums->getDescription(); ?></small>
 
-                <p><a href="#" class="btn btn-primary pull-left" role="button">Delete</a>
-
-                    <!-- Single button -->
-                <div class="btn-group pull-left col-md-offset-1">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        Actions <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="<?php echo ipActionUrl(array('aa'=>'ImageAlbum.attach','id'=>$albums->getId())) ?>">Add Images</a></li>
-                        <li><a href="<?php echo ipActionUrl(array('aa'=>'ImageAlbum.albumcover','id'=>$albums->getId())) ?>">Choose Album Cover</a></li>
-
-                    </ul>
-                </div>
-                </p>
             </div>
             <div class="clearfix"></div>
         </div>

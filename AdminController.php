@@ -2,6 +2,7 @@
 
 namespace Plugin\ImageAlbum;
 use \Plugin\ImageAlbum\Form\Album as AlbumForm;
+
 use \Plugin\ImageAlbum\Entity\AlbumEntity;
 use \Plugin\ImageAlbum\Entity\AlbumImages;
 use \Plugin\ImageAlbum\AlbumImage;
@@ -81,6 +82,36 @@ class AdminController extends \Ip\Controller
 
 
     }
+
+    public function albumcover(){
+        if(ipRequest()->isGet()){
+
+            $model=new AlbumImage();
+            $albumId=ipRequest()->getQuery('id');
+
+            return ipView('view/backend/cover.php',array('id'=>$albumId,'data'=>$model->getImages($albumId)));
+
+            }
+
+        }
+
+    public function makeCover(){
+        if(ipRequest()->isGet()){
+            $AlbumID=ipRequest()->getQuery('album');
+            $ImageID=ipRequest()->getQuery('imageID');
+            //Let's update the table in the Database
+            $model=new Model();
+            if($model->updateAlbumCover($AlbumID,$ImageID)){
+                //Redirect to another browser
+                return new \Ip\Response\Redirect(ipActionUrl(array('aa'=>'ImageAlbum.index')));
+            }
+            else{
+                return new \Ip\Response\PageNotFound("The Parameters were wrong and thus could not update the Content,Please Contain Developer");
+            }
+
+        }
+    }
+
 
     public function create(){
         $formAlbum=new AlbumForm();
