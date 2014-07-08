@@ -4,8 +4,7 @@
 define(['dijit/Dialog'], function (dialog) {
     "use strict"
     var dia = new dialog({
-        title: "Delete Page",
-        content: "Attempting to Detelet Album Image from the Database"
+        title: "Delete Page"
     });
 
     return {
@@ -14,6 +13,7 @@ define(['dijit/Dialog'], function (dialog) {
          * @param id AlbumItem ID from the Dataset
          */
         delete: function (id) {
+            dia.set('content','Attempting to Delete Album Image from the Database')
             dia.show();
             $.ajax({
                 type: 'POST',
@@ -44,6 +44,7 @@ define(['dijit/Dialog'], function (dialog) {
                     }
                 //Remove from Node
                     $("#album"+id).remove();
+                    dia.set('content','');
                     dia.hide();
                 }).fail(function (error) {
 

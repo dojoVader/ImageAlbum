@@ -1,6 +1,7 @@
 //Gallery
 define(['dojox/form/Uploader', 'ImageAlbum/StylFileList', 'dojo/on', 'dijit/registry', 'dojo/dom',
     'dojo/dom-construct', 'dojo/_base/lang', 'dijit/Dialog', 'dojo/request/xhr'], function (Uploader, fileList, on, widget, dom, construct, lang, dialog, xhr) {
+    "use strict";
     var DialogUI = new dialog({title: "Status"});
     document.body.className += " claro";
     var StyljunkiGallery = {
