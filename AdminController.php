@@ -53,6 +53,35 @@ class AdminController extends \Ip\Controller
         return ipView("view/backend/attach.php",array('data'=>$data,'list'=>$listObject->getImages($id)))->render();
     }
 
+    /**
+     * Delete the Record from the Database via Ajax
+     * @return \Ip\Response\Json
+     */
+    public function deleteAjax(){
+        if(ipRequest()->isPost()){
+
+            $id=ipRequest()->getPost('albumImageId');
+            $model=new AlbumImage();
+            if(!$model->delete('id',$id)){
+                //Error message to be thrown
+                $data = array (
+                    'status' => 'error',
+                    'errors' =>'Error Could not delete the Image,Please inform the Developer'
+                );
+            }else{
+                $data=array(
+                    "status"=>"success",
+                    "message"=>sprintf("The Image has been deleted successfully #%d",$id),
+                    "redirect"=>true,
+                    "recordID"=>$id
+                );
+            }
+        return new \Ip\Response\Json($data);
+        }
+
+
+    }
+
     public function create(){
         $formAlbum=new AlbumForm();
         $data=null;
