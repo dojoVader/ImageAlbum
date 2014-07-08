@@ -15,19 +15,17 @@ class Controller extends \Ip\WidgetController{
 
 
     public function getTitle() {
-    	return __('Diary Notes', 'ipAdmin');
+    	return __('SarahsNest Album', 'ipAdmin');
 
     }
     public function generateHtml($revisionId, $widgetId, $data, $skin)
     {
-        ipAddCss("http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
-    	$articlesData=new Model();
-    	$data['items']=$articlesData->getArticles();
-    	$model=new Model();
-    	$currentPageIdx=ipRequest()->getQuery("current",1);
-        $posts = $model->getPaginator("diary_blog", $currentPageIdx,(int)ipGetOption ( 'Diary.diaryPosts' ));
-		$content=$posts->render(__DIR__."/../../view/frontend/_blogs.php");
-		$data['content']=($content === null) ? ipView(__DIR__."/../../view/frontend/empty.php") : $content;
+        $path2Plugin=dirname(dirname(dirname(__FILE__)));
+        $model = new Model ();
+        $currentPageIdx=ipRequest()->getQuery("current",1);
+        $posts = $model->getPaginator("album", $currentPageIdx,30);
+        $listMedia=$posts->render($path2Plugin.'/view/frontend/_albums.php');
+        $data['content']= ($listMedia === null ) ? "<h1>No Albums Yet ..</h1>" : $listMedia;
     	return parent::generateHtml($revisionId, $widgetId, $data, $skin);
     }
 

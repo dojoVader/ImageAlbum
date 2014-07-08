@@ -1,4 +1,4 @@
 
 <div class="ipsContent">
-<?php echo $content;?>
+<?php echo $content; ?>
 </div>
