@@ -16,13 +16,18 @@ class AdminController extends \Ip\Controller
      */
     public function index()
     {
+        ipAddJsContent("create","
+			require(['ImageAlbum/AlbumPage'],function(page){
+                page.bindDelete();
 
+				});
+				");
         $model = new Model ();
         $currentPageIdx=ipRequest()->getQuery("current",1);
         $posts = $model->getPaginator("album", $currentPageIdx,30);
         $listMedia=$posts->render(__DIR__.'/view/backend/_albums.php');
         return ipView ( "view/backend/index.php", array (
-            'albums' => ($listMedia === null ) ? "<h1>No Albums Yet ..</h1>" : $listMedia
+            'albums' => ($listMedia === null ) ? "<div class=\"col-md-12\" id=\"AlbumContent\"><h1>No Albums Yet ..</h1></div>" : $listMedia
         ) );
     }
 
@@ -94,6 +99,16 @@ class AdminController extends \Ip\Controller
             }
 
         }
+
+    public function delete(){
+        if(ipRequest()->isGet()){
+            $id=ipRequest()->getQuery('id');
+            $AlbumModel=new Model();
+            if($AlbumModel->deleteAlbum($id)){
+                return new \Ip\Response\Redirect(ipActionUrl(array('aa'=>'ImageAlbum.index')));
+            }
+        }
+    }
 
     public function makeCover(){
         if(ipRequest()->isGet()){
