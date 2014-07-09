@@ -9,6 +9,7 @@ namespace Plugin\ImageAlbum;
  *
  */
 use Plugin\ImageAlbum\Entity\AlbumEntity;
+use Plugin\ImageAlbum\Entity\AlbumImages;
 
 class Model extends BaseModel
 {
@@ -33,6 +34,31 @@ class Model extends BaseModel
     public function updateAlbumCover($albumID, $imageID)
     {
         return ipDb()->update($this->name, array('album_image_id' => $imageID), array('id' => $albumID));
+    }
+
+    public function returnAsObjectByID($id){
+        $result=$this->byId($id);
+        if($result){
+            /**
+             * @var $item \Plugin\ImageAlbum\Entity\AlbumEntity
+             */
+        $item=new AlbumEntity();
+        $item->setID($result['id']);
+        $item->setDescription($result['description']);
+        $item->setName($result['name']);
+        $item->setAlbumImage($result['album_image_id']);
+        return $item;
+        }
+    }
+
+    public function deleteAlbum($id){
+        //Fetch Albumsitems First Delete then delete this one
+        $albumImages=new AlbumImage();
+        foreach($albumImages->getImages($id) as $row){
+            $albumImages->delete('id',$row->getID());
+        }
+        return $this->delete('id',$id);
+
     }
 
     /**
