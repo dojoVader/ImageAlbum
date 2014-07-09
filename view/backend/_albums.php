@@ -28,7 +28,7 @@
             <div class="caption">
                 <h3><?php  echo esc($albums->getName()); ?></h3>
 
-                <p><a href="#" class="btn btn-primary pull-left" role="button">Delete</a>
+                <p><a href="<?php echo ipActionUrl(array('aa'=>'ImageAlbum.delete','id'=>$albums->getId())) ?>" class="btn deleteAlbum btn-primary pull-left" role="button">Delete</a>
 
                     <!-- Single button -->
                 <div class="btn-group pull-left col-md-offset-1">
