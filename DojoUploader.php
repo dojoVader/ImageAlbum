@@ -229,7 +229,7 @@ class DojoUploader
                     //$_post['additionalParams'] = $postdata;
                     //
 
-                    $htmldata[$cnt] = $_post;
+
                     //Save the Data to the EventImages
                     $AlbumModel=new ImageModel();
                     $AlbumItem=new ImageEntity();
@@ -237,8 +237,11 @@ class DojoUploader
                     $AlbumItem->setCaption("No Caption Set One");
                     $AlbumItem->setAlbumID($Albumid);
                     $AlbumItem->setImages($_post['name']);
-                    $AlbumModel->save($AlbumItem);
+                    $htmldata['lastID']=$AlbumModel->save($AlbumItem);
+                    $htmldata['sent']=true;
                     $this->makeThumbnail($file);
+                    $_post['fullimage']=$AlbumItem->getImages(true);
+                    $htmldata[$cnt] = $_post;
 
                 } elseif (strlen($_FILES['uploadedfiles']['name'][$i])) {
                     $htmldata[$cnt] = array("ERROR" => "File could not be moved: " . $_FILES['uploadedfiles']['name'][$i]);
@@ -260,10 +263,7 @@ class DojoUploader
             //
             if (!ipRequest()->isPost()):
                 $m = move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $upload_path . $_FILES['uploadedfile']['name']);
-                //$galleryRecord=new GalleryRecords();
-                //$galleryRecord->refId=$id;
-                //$galleryRecord->type="hound";
-                //$galleryRecord->filename=$_FILES['uploadedfile']['name'];
+
                 $tmp = $_FILES['uploadedfile']['tmp_name'];
                 $AlbumModel=new ImageModel();
                 $AlbumItem=new ImageEntity();
@@ -293,7 +293,7 @@ class DojoUploader
                 $htmldata['type'] = $type;
                 $htmldata['size'] = filesize($file);
                 $htmldata['additionalParams'] = $postdata;
-                return new \Ip\Response\Redirect(ipActionUrl(array("aa"=>"ImageAlbum.imagePosted")));
+                return new \Ip\Response\Redirect(ipActionUrl(array("aa"=>"ImageAlbum.index")));
             endif;
 
 
