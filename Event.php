@@ -25,23 +25,22 @@ class Event {
 
 		// ipAddCss("http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dijit/themes/claro/claro.css");
 		}
-		else if($e['plugin'] === 'Diary' && $e['controller'] === "SiteController"){
+		else if($e['plugin'] === 'ImageAlbum' && $e['controller'] === "SiteController"){
 			$path=ipFileUrl('Plugin/ImageAlbum/assets/js');
+            ipAddCss("assets/css/album.css");
 			ipAddJsContent("dojoConfig","var dojoConfig={
 			async:true,
 			parseOnLoad:false,
 			selectorEngine: 'acme',
 			packages
-			:[{name:'Diary',location:'$path'}]
+			:[{name:'ImageAlbum',location:'$path'}]
 			}",40);
 			// ipAddJs("http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js",null,50);
 			ipAddJs("http://localhost/dojo1.9/dojo/dojo.js");
 			ipAddCss("http://localhost/dojo1.9/dijit/themes/claro/claro.css");
-			ipAddJs("assets/js/boot-front.js",null,90);
-			ipAddJs("assets/js/holder.js",null,90);
 			// ipAddCss("http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dijit/themes/claro/claro.css");
 			//Font Awesome
-			ipAddCss("http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+
 		}
 	}
 }
