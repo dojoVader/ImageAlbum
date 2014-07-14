@@ -13,8 +13,7 @@ class Worker extends \Ip\SetupWorker
   `name` varchar (255) NOT NULL,
   `album_image_id` int(11) NOT NULL,
   `date` datetime NOT NULL,
-  `image` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Sarah''s Nest is the table' AUTO_INCREMENT=1 ;
         ";
 
@@ -37,18 +36,18 @@ class Worker extends \Ip\SetupWorker
 
     public function deactivate()
     {
-        //We don't want it removed just incase it is re-enabled in the future
-    }
-
-    public function remove()
-    {
-        $sql1 = 'DROP TABLE IF EXISTS ' . ipTable('album');
+       $sql1 = 'DROP TABLE IF EXISTS ' . ipTable('album');
         $sql2 = 'DROP TABLE IF EXISTS ' . ipTable('album_images');
 
 
 
         ipDb()->execute($sql1);
         ipDb()->execute($sql2);
+    }
+
+    public function remove()
+    {
+       
     }
 
 }
