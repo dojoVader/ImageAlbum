@@ -1,6 +1,7 @@
 //Gallery
 define(['dojox/form/Uploader', 'ImageAlbum/StylFileList', 'dojo/on', 'dijit/registry', 'dojo/dom',
-    'dojo/dom-construct', 'dojo/_base/lang', 'dijit/Dialog', 'dojo/request/xhr'], function (Uploader, fileList, on, widget, dom, construct, lang, dialog, xhr) {
+    'dojo/dom-construct', 'dojo/_base/lang', 'dijit/Dialog', 'dojo/request/xhr'],
+    function (Uploader, fileList, on, widget, dom, construct, lang, dialog, xhr) {
     "use strict";
     var DialogUI = new dialog({title: "Status"});
     document.body.className += " claro";
@@ -29,26 +30,29 @@ define(['dojox/form/Uploader', 'ImageAlbum/StylFileList', 'dojo/on', 'dijit/regi
         },
         addFileDiv: function (file) {
             console.log("Complete");
-            if ('wpdata in file') {
-                for (c in file.wpdata) {
 
-                    var divImage = construct.create("div", {
-                        className: "col-sm-4 col-xs-6 col-md-3 col-lg-3"
+                if('status' in file){
+                    file.forEach(function(item,index,array){
+                    var divImage = construct.create("li", {
+                        className: "col-md-6 list-group-item",
+                        id:'album'+file.lastID
                     });
-                    var Ahref = construct.create("a", {
-                        href: file.wpdata[c].fullImage,
-                        rel: 'lightbox',
-                        className: 'thumbnail fancybox'
-                    }, divImage);
+
                     var Image = construct.create("img", {
                         src: file.wpdata[c].thumbnail,
-                        className: 'img-polaroid',
-                        style: 'height:209px !important'
-                    }, Ahref);
+                        className: 'img-responsive'
+                    }, divImage);
+                divImage.innerHTML+="<div class=\"clearfix\"></div><br/>";
+                var Ahref = construct.create("a", {
+                    href: file[index].fullimage,
+                    rel: 'lightbox',
+                    className: 'thumbnail fancybox'
+                }, divImage);
                     //Add to the Gallery
-                    dom.byId("imageList").appendChild(divImage);
+                    $("ul.list-group").appendChild(divImage);
+                });
                 }
-            }
+
         }
     };
     return StyljunkiGallery;
