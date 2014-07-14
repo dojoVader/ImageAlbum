@@ -11,6 +11,7 @@ class Worker extends \Ip\SetupWorker
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(255) NOT NULL,
   `name` varchar (255) NOT NULL,
+  `album_image_id` int(11) NOT NULL,
   `date` datetime NOT NULL,
   `image` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
