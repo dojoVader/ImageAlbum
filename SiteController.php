@@ -12,6 +12,15 @@ namespace Plugin\ImageAlbum;
 class SiteController extends \Ip\Controller {
 
     public function viewAlbum(){
+        //Let's Integrate the ColorBox Assets Here
+        //ColorBox CSS
+        ipAddCss('assets/css/colorbox.css');
+        //ColorBox JS
+        ipAddJs('assets/js/jquery.colorbox.js');
+        ipAddJsContent('colorbox',"jQuery('a[rel=\"lightbox\"').colorbox({
+        scalePhotos:false,
+        MaxWidth:'80%'
+        });");
         //Display the Images in the Album
         $AlbumID=(int)ipRequest()->getQuery('id');
         $albumImages=new AlbumImage();
