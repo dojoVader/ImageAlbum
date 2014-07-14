@@ -10,6 +10,7 @@ class Worker extends \Ip\SetupWorker
         CREATE TABLE IF NOT EXISTS ".ipTable('album')." (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(255) NOT NULL,
+  `name` varchar (255) NOT NULL,
   `date` datetime NOT NULL,
   `image` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
@@ -40,12 +41,13 @@ class Worker extends \Ip\SetupWorker
 
     public function remove()
     {
-        $sql = 'DROP TABLE IF EXISTS ' . ipTable('album');
-        $sql .= 'DROP TABLE IF EXISTS ' . ipTable('album_images');
+        $sql1 = 'DROP TABLE IF EXISTS ' . ipTable('album');
+        $sql2 = 'DROP TABLE IF EXISTS ' . ipTable('album_images');
 
 
 
-        ipDb()->execute($sql);
+        ipDb()->execute($sql1);
+        ipDb()->execute($sql2);
     }
 
 }
