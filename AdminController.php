@@ -39,6 +39,16 @@ class AdminController extends \Ip\Controller
             return new \Ip\Response\Json($result);
         }
     }
+    public function manage(){
+        if(ipRequest()->isGet()){
+            $album=new Model();
+            $model=new AlbumImage();
+            $albumId=ipRequest()->getQuery('id');
+            $title=$album->byId($albumId);
+        $viewData=array('modelImages'=>$model->getImages($albumId),"title"=>$title);
+        return ipView("view/backend/koken.php",array('data'=>$viewData));
+        }
+    }
 
     public function attach(){
         ipAddJsContent("create","
