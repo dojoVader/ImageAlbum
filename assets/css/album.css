@@ -25,3 +25,22 @@
 .ip .ipModuleAdministrators ._menu ul a {
   padding: 1px 20px;
 }
+#galleryBoard #leftBoard {
+  padding-top: 1%;
+}
+#galleryBoard #rightBoard {
+  border-left: 1px solid #e0d6d6;
+}
+#galleryBoard .galleryItem img {
+  margin-bottom: 17px;
+  -webkit-box-shadow: 0px 0px 7px #140022;
+  -moz-box-shadow: 0px 0px 7px #140022;
+  box-shadow: 0px 0px 7px #140022;
+  display: block;
+}
+#galleryBoard .galleryItem img.active {
+  border: 2px solid red;
+}
+#galleryBoard .galleryItem img:hover {
+  border: 2px solid gold;
+}

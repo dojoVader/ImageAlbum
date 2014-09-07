@@ -38,6 +38,7 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="<?php echo ipActionUrl(array('aa'=>'ImageAlbum.attach','id'=>$albums->getId())) ?>">Add Images</a></li>
                         <li><a href="<?php echo ipActionUrl(array('aa'=>'ImageAlbum.albumcover','id'=>$albums->getId())) ?>">Choose Album Cover</a></li>
+                        <li><a href="<?php echo ipActionUrl(array('aa'=>'ImageAlbum.manage','id'=>$albums->getId())) ?>">Manage (Beta)</a></li>
 
                     </ul>
                 </div>
