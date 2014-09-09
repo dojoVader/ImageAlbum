@@ -62,7 +62,7 @@ class AdminController extends \Ip\Controller
             }
             return new \Ip\Response\Json(array(
                 "status"=>"success",
-                "message"=>$stat
+                "message"=>"The Details have been saved successfully"
             ));
         }
         catch( \Ip\Exception\Db $e){
