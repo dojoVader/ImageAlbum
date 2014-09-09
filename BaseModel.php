@@ -85,6 +85,10 @@ class BaseModel {
     public function delete($whereKey,$whereValue){
         return ipDb()->delete($this->name,array($whereKey=>$whereValue));
     }
+
+    public function update($columns,$key){
+        return ipDb()->update($this->name,$columns,$key);
+    }
 }
 
 ?>
