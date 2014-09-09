@@ -4,10 +4,11 @@ namespace Plugin\ImageAlbum;
 use \Plugin\ImageAlbum\Form\Album as AlbumForm;
 
 use \Plugin\ImageAlbum\Entity\AlbumEntity;
-use \Plugin\ImageAlbum\Entity\AlbumImages;
+use \Plugin\ImageAlbum\Entity\AlbumImages as ImageEntity;
 use \Plugin\ImageAlbum\AlbumImage;
 use \Plugin\ImageAlbum\Model;
 use \Plugin\ImageAlbum\DojoUploader;
+
 
 class AdminController extends \Ip\Controller
 {
@@ -29,6 +30,48 @@ class AdminController extends \Ip\Controller
         return ipView ( "view/backend/index.php", array (
             'albums' => ($listMedia === null ) ? "<div class=\"col-md-12\" id=\"AlbumContent\"><h1>No Albums Yet ..</h1></div>" : $listMedia
         ) );
+    }
+    public function getJson(){
+        $id=ipRequest()->getRequest('id');
+    
+        $model=new AlbumImage();
+        $results=$model->getByID($id);
+        return new \Ip\Response\Json(array(
+        "caption"=>$results->getCaption(),
+        "albumUrl"=>$results->getImages(true),
+        ));
+
+    }
+    public function saveJson(){
+        //Let's first save the AlbumItem
+        $imageID=ipRequest()->getRequest('imageID');
+        $caption=ipRequest()->getRequest('caption');
+        $albumCover=ipRequest()->getRequest('isAlbumCover');
+        //Save the Album in the Database
+        $albumImages=new AlbumImage();
+        $AlbumEntity=$albumImages->getByID($imageID);
+        try{
+
+        $stat=$albumImages->update(array(
+         'caption'=>$caption,
+        ),array('id'=>(int)$imageID));
+            //If Album Cover Save the Album cover
+            if($albumCover == "true"){
+                $model=new Model();
+                $model->updateAlbumCover($AlbumEntity->getAlbumID(),$imageID);
+            }
+            return new \Ip\Response\Json(array(
+                "status"=>"success",
+                "message"=>$stat
+            ));
+        }
+        catch( \Ip\Exception\Db $e){
+            return new \Ip\Response\Json(array(
+            "status"=>"error",
+            "message"=>"The Details were not updated, please contact your administrator",
+            "debug"=>$e->getMessage()
+            ));
+        }
     }
 
     public function uploadImages(){
