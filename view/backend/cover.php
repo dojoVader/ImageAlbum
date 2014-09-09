@@ -1,4 +1,5 @@
-<div class="col-md-12" id="AlbumContent">
+<div class="container">
+    <div class="row"><div class="col-md-12" id="AlbumContent">
 
    <table class="table table-hover"">
        <thead>
