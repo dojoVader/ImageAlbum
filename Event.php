@@ -21,12 +21,13 @@ class Event {
 		}",40);
         
         ipAddJs($path."/holder.js");
-		ipAddJs("http://localhost/dojo1.9/dojo/dojo.js");
-		ipAddCss("http://localhost/dojo1.9/dijit/themes/claro/claro.css");
+        ipAddJs("http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js",null,50);
+		// ipAddJs("http://localhost/dojo1.9/dojo/dojo.js");
+		// ipAddCss("http://localhost/dojo1.9/dijit/themes/claro/claro.css");
 		ipAddJs($path."/boot.js");
-		// ipAddJs("http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js",null,50);
+		
 
-		// ipAddCss("http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dijit/themes/claro/claro.css");
+		ipAddCss("http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dijit/themes/claro/claro.css");
 		}
 		else if($e['plugin'] === 'ImageAlbum' && $e['controller'] === "SiteController"){
 			$path=ipFileUrl('Plugin/ImageAlbum/assets/js');
@@ -38,10 +39,10 @@ class Event {
 			packages
 			:[{name:'ImageAlbum',location:'$path'}]
 			}",40);
-			// ipAddJs("http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js",null,50);
-			ipAddJs("http://localhost/dojo1.9/dojo/dojo.js");
-			ipAddCss("http://localhost/dojo1.9/dijit/themes/claro/claro.css");
-			// ipAddCss("http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dijit/themes/claro/claro.css");
+			ipAddJs("http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js",null,50);
+			// ipAddJs("http://localhost/dojo1.9/dojo/dojo.js");
+			// ipAddCss("http://localhost/dojo1.9/dijit/themes/claro/claro.css");
+			ipAddCss("http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dijit/themes/claro/claro.css");
 			//Font Awesome
 
 		}
