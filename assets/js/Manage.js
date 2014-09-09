@@ -16,10 +16,10 @@ define(['dojo/on','dojo/query','dojo/Stateful','dojox/mvc/Output','dojo/request/
               }
           }).then(function(item){
               var dialog=new modal({
-                title:"Image Meta Data has been saved",
-                content:"The Image Details has been stored in the Database"
+                title:"Database Status",
+                content:""
               });
-                  dialog.show();
+                  dialog.set('content',item.message);
            });
         },
         getDetails:function(url){
